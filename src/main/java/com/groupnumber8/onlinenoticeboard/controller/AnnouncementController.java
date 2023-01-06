@@ -4,13 +4,14 @@ import com.groupnumber8.onlinenoticeboard.DTO.AnnouncementDTO;
 import com.groupnumber8.onlinenoticeboard.entities.Announcement;
 import com.groupnumber8.onlinenoticeboard.service.AnnouncementServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin("*")
 @RestController
+@RequestMapping(path = "announcement/api")
 public class AnnouncementController {
     //Injecting Announcement Service Implementation Class
 
@@ -18,13 +19,18 @@ public class AnnouncementController {
     private AnnouncementServiceImplementation announcementServiceImplementation;
 
 
-    @PostMapping(path = "/pos")
+    @PostMapping(path = "/post")
     public String saveAnoucme(@RequestBody AnnouncementDTO announcementDTO){
         return  announcementServiceImplementation.saveAnoucement(announcementDTO);
     }
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/alla")
     public List<Announcement> getAllAnnouncements(){
         return announcementServiceImplementation.getAllAnnouc();
+
+    }
+    @GetMapping(path = "/public")
+    public Optional<Announcement> getAllAnnouncementsPublic(){
+        return announcementServiceImplementation.getAllPublic();
 
     }
 @GetMapping(path = "/mvc/{id}")

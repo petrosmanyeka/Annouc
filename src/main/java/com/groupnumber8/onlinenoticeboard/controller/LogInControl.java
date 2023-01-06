@@ -30,7 +30,7 @@ public class LogInControl {
     @Autowired
     private UserServiceImplementation userServiceImplementation;
 
-    @PostMapping("/log")
+    @PostMapping("/login")
     public JsonTokenResponse checkDetails(@RequestBody LogIn logIn){
         JwtClassToken jwtClassToken =new JwtClassToken();
       

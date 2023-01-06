@@ -14,7 +14,7 @@ public interface UserService  {
 
     List<AppUser> getAllUsers();
 
-    String getUserName(String username);
+    AppUser getUserName(String username);
 
     String saveRoles(Roles roles);
 
@@ -24,4 +24,6 @@ public interface UserService  {
     void addRolesToUser(String username, String name);
 
     String deleteuser(Long id);
+
+    String getUserId(Long id);
 }

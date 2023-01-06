@@ -12,6 +12,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
+@RequestMapping(path = "announcem")
 public class PublicAnnoceContro {
 
     @Autowired

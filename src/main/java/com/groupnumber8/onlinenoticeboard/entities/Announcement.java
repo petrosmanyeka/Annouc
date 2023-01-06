@@ -17,6 +17,7 @@ public class Announcement {
     private String title;
     @Column(length = 100000)
     private String message;
-    private String postedOn;
-    private String expireOn;
+    
+    private String date;
+    private String type;
 }

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImplementation implements  UserService , UserDetailsService {
@@ -39,6 +40,8 @@ public class UserServiceImplementation implements  UserService , UserDetailsServ
 
         appUser.setEmail(userDTO.getEmail());
         appUser.setLastname(userDTO.getLastname());
+
+
         userRepository.save(appUser);
 
         return "saved";
@@ -50,9 +53,9 @@ public class UserServiceImplementation implements  UserService , UserDetailsServ
     }
 
     @Override
-    public String getUserName(String username) {
-        userRepository.findByUsername(username);
-        return "user Returned";
+    public AppUser getUserName(String username) {
+       return userRepository.findByUsername(username);
+
     }
 
     @Override
@@ -79,6 +82,13 @@ public class UserServiceImplementation implements  UserService , UserDetailsServ
     public String deleteuser(Long id) {
         userRepository.deleteById(id);
         return "deleted";
+    }
+
+    @Override
+    public String getUserId(Long id) {
+        userRepository.findById(id);
+
+        return "user";
     }
 
 

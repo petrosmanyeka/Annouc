@@ -5,30 +5,32 @@ import com.groupnumber8.onlinenoticeboard.DTO.UserDTO;
 import com.groupnumber8.onlinenoticeboard.entities.AppUser;
 import com.groupnumber8.onlinenoticeboard.entities.Roles;
 import com.groupnumber8.onlinenoticeboard.service.UserService;
-import com.groupnumber8.onlinenoticeboard.service.UserServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @CrossOrigin("*")
 @RestController
+@RequestMapping(path = "user/api")
 public class UserController {
    @Autowired
     private UserService userService;
- @PostMapping("/savs")
+ @PostMapping("/register")
    public String savaUser(@RequestBody UserDTO userDTO){
        return userService.saveUsers(userDTO);
    }
-   @GetMapping("/alls")
 
+   @GetMapping("/user/{id}")
+
+   public  String getUserId(@PathVariable Long id){
+     return userService.getUserId(id);
+   }
+    @GetMapping("/alls")
     public List<AppUser> getAllUsers(){
      return userService.getAllUsers();
    }
-   @GetMapping("/use/{username}")
-    public String getUserName(@PathVariable String username){
+   @GetMapping("/{username}")
+    public AppUser getUserName(@PathVariable String username){
      return userService.getUserName(username);
    }
    @PostMapping("/saverole")

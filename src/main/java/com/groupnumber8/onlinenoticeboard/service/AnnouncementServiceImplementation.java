@@ -1,21 +1,21 @@
 package com.groupnumber8.onlinenoticeboard.service;
 
 import com.groupnumber8.onlinenoticeboard.DTO.AnnouncementDTO;
-import com.groupnumber8.onlinenoticeboard.DTO.PublicAnnouceModels;
 import com.groupnumber8.onlinenoticeboard.entities.Announcement;
 import com.groupnumber8.onlinenoticeboard.repository.AnnouncementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AnnouncementServiceImplementation implements AnnouncementService{
     private final AnnouncementRepository announcementRepository;
-    AnnouncementServiceImplementation(AnnouncementRepository announcementRepository ){
+    private  final  AnnouncementDTO announcementDTO;
+    AnnouncementServiceImplementation(AnnouncementRepository announcementRepository, AnnouncementDTO announcementDTO){
         this.announcementRepository = announcementRepository;
+        this.announcementDTO = announcementDTO;
     }
 
 
@@ -43,11 +43,15 @@ public class AnnouncementServiceImplementation implements AnnouncementService{
 
         announcement.setTitle( announcementDTO.getTitle());
         announcement.setMessage(announcementDTO.getMessage() );
-        announcement.setPostedOn( announcementDTO.getPostedOn());
-        announcement.setExpireOn(announcementDTO.getExpireOn() );
+        announcement.setDate( announcementDTO.getDate());
+        announcement.setType(announcementDTO.getType() );
         //Now Save The Entity to DB
         announcementRepository.save(announcement);
 
         return "save";
+    }
+
+    public Optional<Announcement> getAllPublic() {
+        return announcementRepository.findAnnouncementByType(announcementDTO.getType());
     }
 }
